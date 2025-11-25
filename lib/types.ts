@@ -5,13 +5,12 @@ export interface Container {
   id: string;
   container_no: string;
   consignee: string;
-  cargo_desc: string; // 新增：货物描述
-  broker: string;
+  destination_port: string; // ✨ 新增：目的港
+  cargo_desc: string;
   status: ContainerStatus;
   etd: string;
-  eta: string;
   lfd: string;
-  file_url?: string;  // 新增：文件链接
-  file_name?: string; // 新增：文件名
+  file_url?: string;
+  file_name?: string;
   created_at: string;
 }
