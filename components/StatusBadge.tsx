@@ -1,8 +1,17 @@
 // components/StatusBadge.tsx
 import { cn } from "@/lib/utils";
-import { ContainerStatus } from "@/lib/types"; // 这里引用你的 types 定义
+import { ContainerStatus } from "@/lib/types";
 
-// 定义每种状态对应的颜色样式
+// 映射表：左边是数据库存的英文，右边是显示的中文
+const statusMap: Record<ContainerStatus, string> = {
+  'On Board': '已装船',
+  'Arrived': '已到港',
+  'Customs Clearance': '清关中',
+  'Released': '已放行',
+  'Closed': '已结案',
+  'Hold': '查验/扣留',
+};
+
 const statusStyles: Record<ContainerStatus, string> = {
   'On Board': 'bg-blue-100 text-blue-700 border-blue-200',
   'Arrived': 'bg-yellow-100 text-yellow-700 border-yellow-200',
@@ -15,11 +24,10 @@ const statusStyles: Record<ContainerStatus, string> = {
 export default function StatusBadge({ status }: { status: ContainerStatus }) {
   return (
     <span className={cn(
-      "px-2.5 py-0.5 rounded-full text-xs font-medium border",
-      // 如果遇到了未知的状态，默认显示灰色
+      "px-2.5 py-0.5 rounded-full text-xs font-bold border shadow-sm",
       statusStyles[status] || 'bg-gray-100 text-gray-800'
     )}>
-      {status}
+      {statusMap[status] || status}
     </span>
   );
 }
